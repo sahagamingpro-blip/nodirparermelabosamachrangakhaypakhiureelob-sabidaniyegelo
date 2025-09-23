@@ -1,0 +1,96 @@
+* [33m6d6a8ac[m[33m ([m[1;36mHEAD[m[33m -> [m[1;32mmain[m[33m, [m[1;31morigin/main[m[33m)[m Yono V2
+* [33m2ee4a98[m first commit
+* [33m05e465d[m v2 pushed
+[31m|[m *   [33m717822a[m[33m ([m[1;32mreplit-agent[m[33m)[m Update footer to include email and Telegram links and revise company navigation
+[31m|[m [32m|[m[31m\[m  
+[31m|[m [32m|[m[31m/[m  
+[31m|[m[31m/[m[32m|[m   
+* [32m|[m [33m9e7bc30[m Update footer to include email and Telegram links and revise company navigation
+[33m|[m *   [33m9cddb7d[m Update footer with email and Telegram links, and important pages
+[33m|[m [34m|[m[33m\[m  
+[33m|[m [34m|[m[33m/[m  
+[33m|[m[33m/[m[34m|[m   
+* [34m|[m [33m0382109[m Update footer with email and Telegram links, and important pages
+[35m|[m *   [33m123871e[m Remove the agent's repl state
+[35m|[m [36m|[m[35m\[m  
+[35m|[m [36m|[m[35m/[m  
+[35m|[m[35m/[m[36m|[m   
+* [36m|[m [33mc92cc7f[m Remove the agent's repl state
+[1;31m|[m *   [33mf44ef77[m Remove Instagram link from the website footer
+[1;31m|[m [1;32m|[m[1;31m\[m  
+[1;31m|[m [1;32m|[m[1;31m/[m  
+[1;31m|[m[1;31m/[m[1;32m|[m   
+* [1;32m|[m [33mff18fc8[m Remove Instagram link from the website footer
+[1;33m|[m *   [33m50ccca1[m Update footer to simplify Telegram link
+[1;33m|[m [1;34m|[m[1;33m\[m  
+[1;33m|[m [1;34m|[m[1;33m/[m  
+[1;33m|[m[1;33m/[m[1;34m|[m   
+* [1;34m|[m [33m642de71[m Update footer to simplify Telegram link
+[1;35m|[m *   [33m7b3115a[m Remove agent state file to reset agent behavior
+[1;35m|[m [1;36m|[m[1;35m\[m  
+[1;35m|[m [1;36m|[m[1;35m/[m  
+[1;35m|[m[1;35m/[m[1;36m|[m   
+* [1;36m|[m [33mb14b5e7[m Remove agent state file to reset agent behavior
+[31m|[m *   [33mab00724[m Remove outdated contact information from the website footer
+[31m|[m [32m|[m[31m\[m  
+[31m|[m [32m|[m[31m/[m  
+[31m|[m[31m/[m[32m|[m   
+* [32m|[m [33ma2e1dc0[m Remove outdated contact information from the website footer
+[33m|[m *   [33m9b5c219[m Remove redundant contact information from the support page
+[33m|[m [34m|[m[33m\[m  
+[33m|[m [34m|[m[33m/[m  
+[33m|[m[33m/[m[34m|[m   
+* [34m|[m [33m9494425[m Remove redundant contact information from the support page
+[35m|[m *   [33md32876e[m Update website appearance and add new contact options
+[35m|[m [36m|[m[35m\[m  
+[35m|[m [36m|[m[35m/[m  
+[35m|[m[35m/[m[36m|[m   
+* [36m|[m [33m096221a[m Update website appearance and add new contact options
+[1;31m|[m *   [33mdb2aa24[m Update hero image and add Telegram contact links throughout the site
+[1;31m|[m [1;32m|[m[1;31m\[m  
+[1;31m|[m [1;32m|[m[1;31m/[m  
+[1;31m|[m[1;31m/[m[1;32m|[m   
+* [1;32m|[m [33mc1829dc[m Update hero image and add Telegram contact links throughout the site
+[1;33m|[m *   [33m470b3a4[m Configure the project to run within the Replit environment
+[1;33m|[m [1;34m|[m[1;33m\[m  
+[1;33m|[m [1;34m|[m[1;33m/[m  
+[1;33m|[m[1;33m/[m[1;34m|[m   
+* [1;34m|[m [33m1575f19[m Configure the project to run within the Replit environment
+[1;35m|[m *   [33m91fc7ca[m Configure the project to run on the Replit platform
+[1;35m|[m [1;36m|[m[1;35m\[m  
+[1;35m|[m [1;36m|[m[1;35m/[m  
+[1;35m|[m[1;35m/[m[1;36m|[m   
+* [1;36m|[m [33m78942be[m Configure the project to run on the Replit platform
+[31m|[m *   [33ma0433b1[m Update project to work in the Replit environment
+[31m|[m [32m|[m[31m\[m  
+[31m|[m [32m|[m[31m/[m  
+[31m|[m[31m/[m[32m|[m   
+* [32m|[m [33m30c8643[m Update project to work in the Replit environment
+[33m|[m *   [33me4fae3e[m Update Replit environment configuration for smooth project execution
+[33m|[m [34m|[m[33m\[m  
+[33m|[m [34m|[m[33m/[m  
+[33m|[m[33m/[m[34m|[m   
+* [34m|[m [33m62bd02c[m Update Replit environment configuration for smooth project execution
+[35m|[m *   [33mb0c374e[m Update project configuration for the Replit development environment
+[35m|[m [36m|[m[35m\[m  
+[35m|[m [36m|[m[35m/[m  
+[35m|[m[35m/[m[36m|[m   
+* [36m|[m [33md5ec54d[m Update project configuration for the Replit development environment
+[1;31m|[m *   [33m0f9c299[m Update application to run in a new environment
+[1;31m|[m [1;32m|[m[1;31m\[m  
+[1;31m|[m [1;32m|[m[1;31m/[m  
+[1;31m|[m[1;31m/[m[1;32m|[m   
+* [1;32m|[m [33mcf44895[m Update application to run in a new environment
+[1;33m|[m * [33m194b2ef[m Configure the project to run in the Replit environment
+[1;33m|[m[1;33m/[m  
+* [33m566b600[m Configure the project to run in the Replit environment
+* [33m9808801[m Update project files and configuration
+* [33mec49f59[m Update configuration with new database connection details
+* [33m599123f[m Update website to securely manage important database credentials
+* [33mcf38a69[m Add user authentication and authorization features to the website
+* [33m69556ca[m Update game development services and button placement
+* [33mcccba06[m Update website to better showcase game development services and casino themes
+* [33me3c309e[m Update agent state for improved performance and stability
+* [33m171848b[m Update website navigation and footer with new company branding and links
+* [33mc8e532b[m Update game name to YONO SLOT across the website
+* [33m651b5c2[m[33m ([m[1;34mgrafted[m[33m)[m Update game showcase with new sample images
