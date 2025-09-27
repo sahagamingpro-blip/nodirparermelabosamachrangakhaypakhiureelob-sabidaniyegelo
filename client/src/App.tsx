@@ -30,7 +30,6 @@ import AdminPanel from "@/pages/admin-panel";
 import AdminLogin from "@/pages/admin-login";
 import ApiPartners from "@/components/ApiPartners"; // ✅ Import ApiPartners page
 import Portfolio from "@/components/Portfolio";
-import StatusPage from "@/pages/status";
 import { ProtectedRoute } from "@/lib/protected-route";
 
 // Home Page Component
@@ -69,7 +68,6 @@ function Router() {
       <Route path="/auth" component={AuthPage} />
       <Route path="/api-partners" component={ApiPartners} /> {/* ✅ New route */}
       <Route path="/portfolio" component={Portfolio} /> {/* ✅ Portfolio route */}
-      <Route path="/status" component={StatusPage} /> {/* ✅ Status page route */}
       <Route component={NotFound} />
     </Switch>
   );

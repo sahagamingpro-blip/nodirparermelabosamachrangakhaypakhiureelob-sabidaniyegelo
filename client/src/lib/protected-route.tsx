@@ -4,7 +4,7 @@ import { Loader2 } from "lucide-react";
 import { Redirect, Route } from "wouter";
 
 // Create a wrapper component that handles the protection logic
-function ProtectedWrapper({ Component }: { Component: React.ComponentType }) {
+function ProtectedWrapper({ Component }: { Component: () => React.JSX.Element }) {
   const { user, isLoading } = useAuth();
 
   if (isLoading) {
@@ -27,7 +27,7 @@ export function ProtectedRoute({
   component: Component,
 }: {
   path: string;
-  component: React.ComponentType;
+  component: () => React.JSX.Element;
 }) {
   return <Route path={path} component={() => <ProtectedWrapper Component={Component} />} />;
 }

@@ -266,35 +266,6 @@ export async function registerRoutes(app: Express): Promise<Server> {
     }
   });
 
-  // Health check endpoint
-  app.get('/health', async (req, res) => {
-    try {
-      // Check database connectivity
-      let dbStatus = 'unknown';
-      if ('pool' in storage) {
-        try {
-          await (storage as any).pool.execute('SELECT 1');
-          dbStatus = 'connected';
-        } catch (dbError) {
-          dbStatus = 'disconnected';
-        }
-      }
-      
-      res.status(200).json({
-        status: 'ok',
-        timestamp: new Date().toISOString(),
-        uptime: process.uptime(),
-        version: process.env.npm_package_version || '1.0.0',
-        database: dbStatus
-      });
-    } catch (error) {
-      res.status(500).json({
-        status: 'error',
-        error: (error as Error).message
-      });
-    }
-  });
-
   const httpServer = createServer(app);
 
   return httpServer;
