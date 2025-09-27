@@ -1,0 +1,18 @@
+{
+  "css.validate": false,
+  "scss.validate": false,
+  "less.validate": false,
+  "tailwindCSS.includeLanguages": {
+    "css": "css"
+},
+"cSpell.words": [
+    "contenteditable",
+    "Hoverable",
+    "Mansouri",
+    "Rahul",
+    "Sharma",
+    "Toggleable",
+    "wouter",
+    "YONO"
+]
+}

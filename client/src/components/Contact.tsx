@@ -115,7 +115,7 @@ export default function Contact() {
             {contactInfo.map((info, index) => (
               <Card key={index} className="hover-elevate">
                 <CardContent className="p-4 sm:p-6">
-                  <a href={info.title === 'Telegram Chat' ? "https://t.me/yt_dvx" : "#"} target="_blank" rel="noopener noreferrer" className="block">
+                  <a href={info.title === 'Telegram Chat' ? "https://t.me/yt_dvx" : "mailto:support@a2z.dog?subject=YONO SLOT Purchase Inquiry&body=Hi, I am interested in purchasing the YONO SLOT game for ₹1,30,000. Please send me the payment details and delivery timeline."} target="_blank" rel="noopener noreferrer" className="block">
                     <div className="flex items-start space-x-3 sm:space-x-4">
                       <div className={`p-2 sm:p-3 rounded-lg bg-primary/10 ${info.color}`}>
                         <info.icon className="h-5 w-5 sm:h-6 sm:w-6" />

@@ -9,75 +9,75 @@ import { ChevronLeft, ChevronRight, Star, Quote } from 'lucide-react';
 const reviews = [
   {
     id: 1,
-    name: 'Rahul Sharma',
-    role: 'CEO, GamingHub India',
+    name: 'Rahul Mehta',
+    role: 'Lucky Spin Mania',
     avatar: '',
     rating: 5,
     review:
-      'Exceptional service! They delivered our Rummy game in just 4 days with all API integrations working flawlessly. The admin panel is incredibly user-friendly, and their support team is outstanding.',
-    gameType: 'Indian Rummy',
+      'A2Z Game Development Company delivered an amazing slot game with stunning graphics and smooth gameplay. The integration was seamless, and our players love it!',
+    gameType: 'Slot Game',
     location: 'Mumbai, India',
-    date: '2024-01-15',
+    date: '2025-06-15',
   },
   {
     id: 2,
-    name: 'Sarah Johnson',
-    role: 'Founder, CasinoTech Solutions',
+    name: 'Priya Reddy',
+    role: 'Fortune Reels',
     avatar: '',
     rating: 5,
     review:
-      'Outstanding work on our slot games! The graphics are stunning, the gameplay is smooth, and the integration with payment gateways was seamless. Highly recommend for serious casino development.',
+      'Exceptional work by A2Z Game Development Company! The slot game exceeded our expectations. Very responsive support and quick turnaround. Highly recommend!',
     gameType: 'Slot Games',
-    location: 'London, UK',
-    date: '2024-01-10',
+    location: 'Bengaluru, India',
+    date: '2024-12-10',
   },
   {
     id: 3,
-    name: 'Ahmed Al-Mansouri',
-    role: 'Director, Emirates Gaming',
+    name: 'Arjun Kapoor',
+    role: 'Mega Jackpot Quest',
     avatar: '',
     rating: 5,
     review:
-      'Professional team with excellent communication. Our Teen Patti game exceeded expectations with custom features and beautiful UI. The 6-month support has been invaluable.',
-    gameType: 'Teen Patti',
-    location: 'Dubai, UAE',
-    date: '2024-01-05',
+      'The gameplay is smooth and the design is fantastic. A2Z Game Development Company was professional throughout the project, and our users are thrilled.',
+    gameType: 'Slot Game',
+    location: 'Delhi, India',
+    date: '2024-12-05',
   },
   {
     id: 4,
-    name: 'David Chen',
-    role: 'CTO, AsianPlay',
+    name: 'Kavya Sharma',
+    role: 'Spin Kingdom',
     avatar: '',
     rating: 5,
     review:
-      'Incredible turnaround time! We got our complete casino platform with 5 games in just one week. The code quality is top-notch and everything is well-documented. Will definitely work with them again.',
-    gameType: 'Multiple Games',
-    location: 'Singapore',
-    date: '2023-12-28',
+      'Absolutely delighted with the slot game development from A2Z Game Development Company. Fast delivery and the admin panel is super user-friendly.',
+    gameType: 'Slot Game',
+    location: 'Hyderabad, India',
+    date: '2024-11-14',
   },
   {
     id: 5,
-    name: 'Maria Rodriguez',
-    role: 'Product Manager, LatinCasino',
+    name: 'Manish Gupta',
+    role: 'Treasure Spin',
     avatar: '',
     rating: 5,
     review:
-      'Best investment we made! The fishing game they developed became our most popular title. Great attention to detail, responsive support, and they delivered exactly what was promised.',
-    gameType: 'Fishing Games',
-    location: 'Mexico City, Mexico',
-    date: '2023-12-20',
+      'Great attention to detail by A2Z Game Development Company! The slot game is visually appealing and fully functional. We couldn’t be happier with the outcome.',
+    gameType: 'Slot Game',
+    location: 'Pune, India',
+    date: '2024-10-20',
   },
   {
     id: 6,
-    name: 'James Wilson',
-    role: 'Founder, PlayNow Gaming',
+    name: 'Sidharth Sarkar',
+    role: 'Founder, Gold Rush Reels',
     avatar: '',
     rating: 5,
     review:
-      'From initial consultation to final delivery, everything was perfect. They understood our requirements immediately and delivered a crash game that our users absolutely love. Exceeded all expectations!',
-    gameType: 'Crash Games',
-    location: 'Toronto, Canada',
-    date: '2023-12-15',
+      'Professional and reliable! A2Z Game Development Company created an engaging slot game, and the support from the team was excellent. Highly recommended.',
+    gameType: 'Slot Game',
+    location: 'West Bengal, India',
+    date: '2024-02-08',
   },
 ];
 
@@ -130,8 +130,8 @@ export default function Reviews() {
         {/* Stats Bar */}
         <div className="flex flex-wrap justify-center gap-8 mb-16">
           {[
-            { number: '500+', label: 'Games Delivered' },
-            { number: '100+', label: 'Happy Clients' },
+            { number: '124+', label: 'Games Delivered' },
+            { number: '118+', label: 'Happy Clients' },
             { number: '5.0', label: 'Average Rating', icon: Star },
             { number: '3-4', label: 'Days Delivery' },
           ].map((stat, index) => (
@@ -263,12 +263,17 @@ export default function Reviews() {
                   Ready to build your dream casino game?
                 </p>
               </div>
-              <Button size="lg" data-testid="button-start-project">
+              <Button size="lg" data-testid="button-start-project" onClick={() => window.location.href = '/contact'}>
                 Start Your Project
               </Button>
+              
             </div>
           </div>
         </div>
+
+
+
+        
       </div>
     </section>
   );

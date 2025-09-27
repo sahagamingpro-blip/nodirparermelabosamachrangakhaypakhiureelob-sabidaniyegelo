@@ -81,7 +81,7 @@ export default function Hero() {
             </Button>
           </Link>
           
-          <Link href="/games" className="w-full sm:w-auto">
+          <Link href="/app-demo" className="w-full sm:w-auto">
             <Button 
               variant="outline" 
               size="lg"
@@ -115,7 +115,7 @@ export default function Hero() {
           <div className="hidden sm:block w-px h-6 bg-gray-600" />
           
           <div className="flex items-center">
-            <div className="flex -space-x-0.5 mr-2 sm:mr-3">
+            <div className="flex -space-x-0.1 mr-2 sm:mr-3">
               {[...Array(5)].map((_, i) => (
                 <Star key={i} className="h-4 w-4 sm:h-5 sm:w-5 text-yellow-400 fill-current" />
               ))}

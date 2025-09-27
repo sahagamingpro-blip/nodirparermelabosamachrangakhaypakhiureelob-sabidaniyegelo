@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { useAuth } from '@/hooks/use-auth';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
@@ -6,6 +6,8 @@ import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { Badge } from '@/components/ui/badge';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
+import { DatePicker } from '@/components/ui/date-picker';
+import { Captcha } from '@/components/ui/captcha';
 import { 
   Crown,
   User,
@@ -15,7 +17,9 @@ import {
   Lock,
   UserPlus,
   ArrowLeft,
-  Gamepad2
+  Gamepad2,
+  Eye,
+  EyeOff
 } from 'lucide-react';
 import { Link, useLocation } from 'wouter';
 import { useForm } from 'react-hook-form';
@@ -25,7 +29,7 @@ import { z } from 'zod';
 
 // Login form schema
 const loginSchema = z.object({
-  username: z.string().min(1, 'Username is required'),
+  username: z.string().min(1, 'Username/Email is required'),
   password: z.string().min(1, 'Password is required'),
 });
 
@@ -34,6 +38,9 @@ type LoginFormData = z.infer<typeof loginSchema>;
 // Registration form schema
 const registerSchema = insertUserSchema.extend({
   confirmPassword: z.string().min(6, 'Password must be at least 6 characters'),
+  phone: z.string()
+    .min(1, 'Phone number is required')
+    .regex(/^(\+91[\s-]?)?[6-9]\d{9}$/, 'Please enter a valid Indian phone number (10 digits starting with 6-9, optionally with +91)'),
 }).refine((data) => data.password === data.confirmPassword, {
   message: "Passwords don't match",
   path: ["confirmPassword"],
@@ -45,12 +52,18 @@ export default function AuthPage() {
   const [, setLocation] = useLocation();
   const { user, loginMutation, registerMutation } = useAuth();
   const [activeTab, setActiveTab] = useState('login');
+  const [showLoginPassword, setShowLoginPassword] = useState(false);
+  const [showRegisterPassword, setShowRegisterPassword] = useState(false);
+  const [showConfirmPassword, setShowConfirmPassword] = useState(false);
+  const [captchaSessionId, setCaptchaSessionId] = useState('');
+  const [captchaCode, setCaptchaCode] = useState('');
 
   // Redirect if user is already logged in
-  if (user) {
-    setLocation('/');
-    return null;
-  }
+  useEffect(() => {
+    if (user) {
+      setLocation('/order');
+    }
+  }, [user, setLocation]);
 
   const loginForm = useForm<LoginFormData>({
     resolver: zodResolver(loginSchema),
@@ -69,7 +82,7 @@ export default function AuthPage() {
       fullName: '',
       email: '',
       phone: '',
-      dateOfBirth: new Date(),
+      dateOfBirth: '',
     },
   });
 
@@ -79,24 +92,27 @@ export default function AuthPage() {
 
   const handleRegister = (data: RegisterFormData) => {
     const { confirmPassword, ...registerData } = data;
-    registerMutation.mutate(registerData);
+    registerMutation.mutate({
+      ...registerData,
+      captchaSessionId,
+      captchaCode
+    });
+  };
+
+  const handleCaptchaChange = (sessionId: string, code: string) => {
+    setCaptchaSessionId(sessionId);
+    setCaptchaCode(code);
   };
 
   return (
     <div className="min-h-screen bg-background">
       <div className="container mx-auto px-4 py-8">
-        <div className="grid lg:grid-cols-2 gap-12 items-center min-h-[calc(100vh-4rem)]">
+        <div className="grid lg:grid-cols-1 gap-12 items-center min-h-[calc(100vh-4rem)]">
           {/* Left Column - Auth Forms */}
           <div className="flex flex-col justify-center">
             <div className="max-w-md mx-auto w-full">
               {/* Header */}
               <div className="text-center mb-8">
-                <Link href="/">
-                  <Button variant="ghost" className="mb-4" data-testid="button-back-home">
-                    <ArrowLeft className="h-4 w-4 mr-2" />
-                    Back to Home
-                  </Button>
-                </Link>
                 
                 <Badge className="mb-4 bg-accent/20 text-accent border-accent">
                   <Crown className="h-3 w-3 mr-1" />
@@ -130,12 +146,12 @@ export default function AuthPage() {
                     <CardContent>
                       <form onSubmit={loginForm.handleSubmit(handleLogin)} className="space-y-4">
                         <div>
-                          <Label htmlFor="login-username">Username</Label>
+                          <Label htmlFor="login-username">Username/Email</Label>
                           <Input
                             id="login-username"
                             data-testid="input-login-username"
                             {...loginForm.register('username')}
-                            placeholder="Enter your username"
+                            placeholder="Enter your username/email"
                           />
                           {loginForm.formState.errors.username && (
                             <p className="text-sm text-red-500 mt-1">
@@ -146,13 +162,27 @@ export default function AuthPage() {
 
                         <div>
                           <Label htmlFor="login-password">Password</Label>
-                          <Input
-                            id="login-password"
-                            type="password"
-                            data-testid="input-login-password"
-                            {...loginForm.register('password')}
-                            placeholder="Enter your password"
-                          />
+                          <div className="relative">
+                            <Input
+                              id="login-password"
+                              type={showLoginPassword ? "text" : "password"}
+                              data-testid="input-login-password"
+                              {...loginForm.register('password')}
+                              placeholder="Enter your password"
+                              className="pr-10"
+                            />
+                            <button
+                              type="button"
+                              className="absolute inset-y-0 right-0 pr-3 flex items-center"
+                              onClick={() => setShowLoginPassword(!showLoginPassword)}
+                            >
+                              {showLoginPassword ? (
+                                <EyeOff className="h-4 w-4 text-gray-400 hover:text-gray-600" />
+                              ) : (
+                                <Eye className="h-4 w-4 text-gray-400 hover:text-gray-600" />
+                              )}
+                            </button>
+                          </div>
                           {loginForm.formState.errors.password && (
                             <p className="text-sm text-red-500 mt-1">
                               {loginForm.formState.errors.password.message}
@@ -239,7 +269,7 @@ export default function AuthPage() {
                               id="register-phone"
                               data-testid="input-register-phone"
                               {...registerForm.register('phone')}
-                              placeholder="+91 98765 43210"
+                              placeholder="+91 9800100100 or 9800100100"
                             />
                             {registerForm.formState.errors.phone && (
                               <p className="text-sm text-red-500 mt-1">
@@ -250,11 +280,20 @@ export default function AuthPage() {
 
                           <div>
                             <Label htmlFor="register-dob">Date of Birth</Label>
-                            <Input
-                              id="register-dob"
-                              type="date"
-                              data-testid="input-register-dob"
-                              {...registerForm.register('dateOfBirth')}
+                            <DatePicker
+                              date={registerForm.watch('dateOfBirth') ? new Date(registerForm.watch('dateOfBirth').split('-').reverse().join('-')) : undefined}
+                              onDateChange={(date) => {
+                                if (date) {
+                                  const day = date.getDate().toString().padStart(2, '0');
+                                  const month = (date.getMonth() + 1).toString().padStart(2, '0');
+                                  const year = date.getFullYear();
+                                  registerForm.setValue('dateOfBirth', `${day}-${month}-${year}`);
+                                } else {
+                                  registerForm.setValue('dateOfBirth', '');
+                                }
+                              }}
+                              placeholder="Select Date of Birth"
+                              className="w-full"
                             />
                             {registerForm.formState.errors.dateOfBirth && (
                               <p className="text-sm text-red-500 mt-1">
@@ -267,13 +306,27 @@ export default function AuthPage() {
                         <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                           <div>
                             <Label htmlFor="register-password">Password</Label>
-                            <Input
-                              id="register-password"
-                              type="password"
-                              data-testid="input-register-password"
-                              {...registerForm.register('password')}
-                              placeholder="Create password"
-                            />
+                            <div className="relative">
+                              <Input
+                                id="register-password"
+                                type={showRegisterPassword ? "text" : "password"}
+                                data-testid="input-register-password"
+                                {...registerForm.register('password')}
+                                placeholder="Create password"
+                                className="pr-10"
+                              />
+                              <button
+                                type="button"
+                                className="absolute inset-y-0 right-0 pr-3 flex items-center"
+                                onClick={() => setShowRegisterPassword(!showRegisterPassword)}
+                              >
+                                {showRegisterPassword ? (
+                                  <EyeOff className="h-4 w-4 text-gray-400 hover:text-gray-600" />
+                                ) : (
+                                  <Eye className="h-4 w-4 text-gray-400 hover:text-gray-600" />
+                                )}
+                              </button>
+                            </div>
                             {registerForm.formState.errors.password && (
                               <p className="text-sm text-red-500 mt-1">
                                 {registerForm.formState.errors.password.message}
@@ -283,13 +336,27 @@ export default function AuthPage() {
 
                           <div>
                             <Label htmlFor="register-confirm">Confirm Password</Label>
-                            <Input
-                              id="register-confirm"
-                              type="password"
-                              data-testid="input-register-confirm"
-                              {...registerForm.register('confirmPassword')}
-                              placeholder="Confirm password"
-                            />
+                            <div className="relative">
+                              <Input
+                                id="register-confirm"
+                                type={showConfirmPassword ? "text" : "password"}
+                                data-testid="input-register-confirm"
+                                {...registerForm.register('confirmPassword')}
+                                placeholder="Confirm password"
+                                className="pr-10"
+                              />
+                              <button
+                                type="button"
+                                className="absolute inset-y-0 right-0 pr-3 flex items-center"
+                                onClick={() => setShowConfirmPassword(!showConfirmPassword)}
+                              >
+                                {showConfirmPassword ? (
+                                  <EyeOff className="h-4 w-4 text-gray-400 hover:text-gray-600" />
+                                ) : (
+                                  <Eye className="h-4 w-4 text-gray-400 hover:text-gray-600" />
+                                )}
+                              </button>
+                            </div>
                             {registerForm.formState.errors.confirmPassword && (
                               <p className="text-sm text-red-500 mt-1">
                                 {registerForm.formState.errors.confirmPassword.message}
@@ -298,14 +365,20 @@ export default function AuthPage() {
                           </div>
                         </div>
 
-                        <Button 
-                          type="submit" 
-                          className="w-full" 
-                          disabled={registerMutation.isPending}
-                          data-testid="button-register-submit"
-                        >
-                          {registerMutation.isPending ? 'Creating Account...' : 'Create Account'}
-                        </Button>
+                        {/* Captcha Verification */}
+                        <Captcha 
+                          onCaptchaChange={handleCaptchaChange}
+                          error={registerMutation.error?.message.includes('captcha') ? registerMutation.error.message : undefined}
+                        />
+
+        <Button 
+          type="submit" 
+          className="w-full" 
+          disabled={registerMutation.isPending || !captchaCode || captchaCode.length !== 6}
+          data-testid="button-register-submit"
+        >
+          {registerMutation.isPending ? 'Creating Account...' : 'Create Account'}
+        </Button>
                       </form>
                     </CardContent>
                   </Card>
@@ -314,44 +387,7 @@ export default function AuthPage() {
             </div>
           </div>
 
-          {/* Right Column - Hero Section */}
-          <div className="flex flex-col justify-center text-center lg:text-left">
-            <div className="mb-8">
-              <div className="flex items-center justify-center lg:justify-start mb-4">
-                <Gamepad2 className="h-12 w-12 text-primary mr-3" />
-                <span className="text-3xl font-bold bg-gradient-to-r from-primary to-accent bg-clip-text text-transparent">
-                  A2Z Game Developer
-                </span>
-              </div>
-              <p className="text-sm text-muted-foreground mb-6">
-                www.a2z.dog (.dog = Development of Games)
-              </p>
-            </div>
-
-            <h2 className="text-4xl font-bold mb-6">
-              YONO SLOT Game Development
-            </h2>
-            
-            <p className="text-xl text-muted-foreground mb-8">
-              Get access to our complete YONO SLOT Game package for ₹1,30,000. 
-              Includes API-based slot games, Indian rummy, teen patti, crash games, and fishing games.
-            </p>
-
-            <div className="space-y-4">
-              <div className="flex items-center justify-center lg:justify-start">
-                <Crown className="h-5 w-5 text-accent mr-3" />
-                <span>Complete Source Code Included</span>
-              </div>
-              <div className="flex items-center justify-center lg:justify-start">
-                <Lock className="h-5 w-5 text-accent mr-3" />
-                <span>Admin Panel & Payment Integration</span>
-              </div>
-              <div className="flex items-center justify-center lg:justify-start">
-                <Mail className="h-5 w-5 text-accent mr-3" />
-                <span>30 Days Technical Support</span>
-              </div>
-            </div>
-          </div>
+          
         </div>
       </div>
     </div>

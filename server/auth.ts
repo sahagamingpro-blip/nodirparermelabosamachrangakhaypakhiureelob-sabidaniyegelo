@@ -23,10 +23,22 @@ async function hashPassword(password: string) {
 }
 
 async function comparePasswords(supplied: string, stored: string) {
-  const [hashed, salt] = stored.split(".");
-  const hashedBuf = Buffer.from(hashed, "hex");
-  const suppliedBuf = (await scryptAsync(supplied, salt, 64)) as Buffer;
-  return timingSafeEqual(hashedBuf, suppliedBuf);
+  try {
+    if (!stored.includes('.')) {
+      return false;
+    }
+    
+    const [hashed, salt] = stored.split(".");
+    if (!hashed || !salt) {
+      return false;
+    }
+    
+    const hashedBuf = Buffer.from(hashed, "hex");
+    const suppliedBuf = (await scryptAsync(supplied, salt, 64)) as Buffer;
+    return timingSafeEqual(hashedBuf, suppliedBuf);
+  } catch (error) {
+    return false;
+  }
 }
 
 export function setupAuth(app: Express) {
@@ -44,28 +56,58 @@ export function setupAuth(app: Express) {
 
   passport.use(
     new LocalStrategy(async (username, password, done) => {
-      const user = await storage.getUserByUsername(username);
-      if (!user || !(await comparePasswords(password, user.password))) {
-        return done(null, false);
-      } else {
+      try {
+        const user = await storage.getUserByUsername(username);
+        
+        if (!user) {
+          return done(null, false, { message: 'Username not found' });
+        }
+        
+        const passwordMatch = await comparePasswords(password, user.password);
+        
+        if (!passwordMatch) {
+          return done(null, false, { message: 'Invalid password' });
+        }
+        
         return done(null, user);
+      } catch (error) {
+        return done(error);
       }
     }),
   );
 
-  passport.serializeUser((user, done) => done(null, user.id));
-  passport.deserializeUser(async (id: string, done) => {
-    const user = await storage.getUser(id);
-    done(null, user);
+  passport.serializeUser((user: any, done) => {
+    if (user.role) {
+      // This is an admin user
+      done(null, { id: user.id, type: 'admin' });
+    } else {
+      // This is a regular user
+      done(null, { id: user.id, type: 'user' });
+    }
+  });
+  
+  passport.deserializeUser(async (obj: any, done) => {
+    try {
+      if (typeof obj === 'number') {
+        // Legacy format - assume regular user
+        const user = await storage.getUser(obj);
+        done(null, user);
+      } else if (obj.type === 'admin') {
+        const admin = await storage.getAdminById(obj.id);
+        done(null, admin);
+      } else if (obj.type === 'user') {
+        const user = await storage.getUser(obj.id);
+        done(null, user);
+      } else {
+        done(null, false);
+      }
+    } catch (error) {
+      done(error);
+    }
   });
 
   app.post("/api/register", async (req, res, next) => {
     try {
-      const existingUser = await storage.getUserByUsername(req.body.username);
-      if (existingUser) {
-        return res.status(400).send("Username already exists");
-      }
-
       const user = await storage.createUser({
         ...req.body,
         password: await hashPassword(req.body.password),
@@ -76,8 +118,7 @@ export function setupAuth(app: Express) {
         res.status(201).json(user);
       });
     } catch (error) {
-      console.error('Registration error:', error);
-      res.status(500).send("Registration failed");
+      res.status(400).send((error as Error).message || "Registration failed");
     }
   });
 

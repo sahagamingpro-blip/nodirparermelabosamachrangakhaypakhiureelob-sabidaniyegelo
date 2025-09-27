@@ -61,12 +61,7 @@ export default function PrivacyPolicy() {
       <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Header */}
         <div className="text-center mb-12">
-          <Link href="/">
-            <Button variant="ghost" className="mb-4" data-testid="button-back-home">
-              <ArrowLeft className="h-4 w-4 mr-2" />
-              Back to Home
-            </Button>
-          </Link>
+          
           
           <Badge className="mb-4 bg-accent/20 text-accent border-accent">
             <Shield className="h-3 w-3 mr-1" />
@@ -83,7 +78,7 @@ export default function PrivacyPolicy() {
           </p>
           
           <p className="text-sm text-muted-foreground mt-4">
-            Last updated: September 22, 2025
+            Last updated: June 05, 2025
           </p>
         </div>
 

@@ -1,0 +1,14 @@
+# Add these dependencies to your package.json
+
+# Backend dependencies (add to server package.json or root if using monorepo)
+npm install mysql2 express-mysql-session canvas
+npm install --save-dev @types/mysql2
+
+# Remove Supabase dependencies (if you want to completely remove them)
+npm uninstall @supabase/supabase-js
+
+# Note: canvas is needed for captcha generation
+# On some systems you might need to install additional dependencies:
+# Ubuntu/Debian: sudo apt-get install build-essential libcairo2-dev libpango1.0-dev libjpeg-dev libgif-dev librsvg2-dev
+# CentOS/RHEL: sudo yum install gcc-c++ cairo-devel pango-devel libjpeg-turbo-devel giflib-devel
+# macOS: brew install pkg-config cairo pango libpng jpeg giflib librsvg

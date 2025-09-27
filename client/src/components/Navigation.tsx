@@ -1,6 +1,18 @@
 import { useState, useEffect } from 'react';
 import { Link, useLocation } from 'wouter';
-import { Menu, X, ChevronDown, Gamepad2, Mail, Play, User, LogOut } from 'lucide-react';
+import { 
+  Menu, 
+  X, 
+  ChevronDown, 
+  Gamepad2, 
+  Mail, 
+  Play, 
+  User, 
+  LogOut, 
+  Wrench, // ✅ Added for Services
+  Crown,
+  Package
+} from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import {
   DropdownMenu,
@@ -27,19 +39,21 @@ export default function Navigation() {
 
   // Manage demo menu state based on current location
   useEffect(() => {
-    const isDemoPage = location === '/games' || location === '/admin-demo';
+    const isDemoPage = location === '/app-demo' || location === '/admin-demo';
     setIsDemoOpen(isDemoPage);
   }, [location]);
 
   const navigation = [
     { name: 'Home', href: '/' },
     { name: 'About Us', href: '/about' },
+    { name: 'Services', href: '/services' }, // ✅ Services entry
     { 
       name: 'View Demo', 
       href: '#',
       dropdown: [
-        { name: 'App Demo', href: '/games' },
+        { name: 'App Demo', href: '/app-demo' },
         { name: 'Admin Demo', href: '/admin-demo' },
+        { name: 'Demo Game Download', href: '/portfolio' },
       ]
     },
     { name: 'Contact Us', href: '/contact' },
@@ -98,8 +112,13 @@ export default function Navigation() {
                 <Link key={item.name} href={item.href} data-testid={`link-${item.name.toLowerCase()}`}>
                   <Button 
                     variant={location === item.href ? "secondary" : "ghost"}
-                    className="transition-colors"
+                    className="transition-colors flex items-center"
                   >
+                    {/* ✅ Desktop icons */}
+                    {item.name === 'Home' && <Gamepad2 className="h-4 w-4 mr-2" />}
+                    {item.name === 'About Us' && <User className="h-4 w-4 mr-2" />}
+                    {item.name === 'Services' && <Wrench className="h-4 w-4 mr-2" />}
+                    {item.name === 'Contact Us' && <Mail className="h-4 w-4 mr-2" />}
                     {item.name}
                   </Button>
                 </Link>
@@ -119,6 +138,18 @@ export default function Navigation() {
                   </Button>
                 </DropdownMenuTrigger>
                 <DropdownMenuContent align="end" className="w-48">
+                  <DropdownMenuItem asChild>
+                    <Link href="/order" data-testid="link-order-game">
+                      <Crown className="h-4 w-4 mr-2" />
+                      Order Game
+                    </Link>
+                  </DropdownMenuItem>
+                  <DropdownMenuItem asChild>
+                    <Link href="/order-status" data-testid="link-order-status">
+                      <Package className="h-4 w-4 mr-2" />
+                      Order Status
+                    </Link>
+                  </DropdownMenuItem>
                   <DropdownMenuItem 
                     onClick={() => logoutMutation.mutate()}
                     data-testid="button-logout"
@@ -130,9 +161,9 @@ export default function Navigation() {
               </DropdownMenu>
             ) : (
               <Link href="/auth">
-                <Button  size="sm" data-testid="button-login">
+                <Button size="sm" className="px-4 py-2 text-sm" data-testid="button-login">
                   <User className="h-4 w-4 mr-2" />
-                  Login / Register
+                 Login / Register
                 </Button>
               </Link>
             )}
@@ -212,8 +243,10 @@ export default function Navigation() {
                         className="w-full justify-start group hover:bg-primary/10"
                         onClick={() => setIsOpen(false)}
                       >
+                        {/* ✅ Mobile icons */}
                         {item.name === 'Home' && <Gamepad2 className="h-4 w-4 mr-2 group-hover:text-primary" />}
                         {item.name === 'About Us' && <User className="h-4 w-4 mr-2 group-hover:text-primary" />}
+                        {item.name === 'Services' && <Wrench className="h-4 w-4 mr-2 group-hover:text-primary" />}
                         {item.name === 'Contact Us' && <Mail className="h-4 w-4 mr-2 group-hover:text-primary" />}
                         <span className="group-hover:text-primary">{item.name}</span>
                       </Button>
@@ -249,6 +282,30 @@ export default function Navigation() {
                           </div>
                         </div>
                       </div>
+                      <div className="space-y-2">
+                        <Link href="/order">
+                          <Button 
+                            variant="ghost" 
+                            className="w-full justify-start hover:bg-primary/10 hover:text-primary" 
+                            data-testid="mobile-link-order-game"
+                            onClick={() => setIsOpen(false)}
+                          >
+                            <Crown className="h-4 w-4 mr-2" />
+                            Order Game
+                          </Button>
+                        </Link>
+                        <Link href="/order-status">
+                          <Button 
+                            variant="ghost" 
+                            className="w-full justify-start hover:bg-primary/10 hover:text-primary" 
+                            data-testid="mobile-link-order-status"
+                            onClick={() => setIsOpen(false)}
+                          >
+                            <Package className="h-4 w-4 mr-2" />
+                            Order Status
+                          </Button>
+                        </Link>
+                      </div>
                       <Button 
                         variant="ghost" 
                         className="w-full justify-start text-destructive hover:bg-destructive/10 hover:text-destructive" 
@@ -265,7 +322,7 @@ export default function Navigation() {
                   ) : (
                     <Link href="/auth">
                       <Button 
-                        className="w-full h-12 shadow-lg bg-primary hover:bg-primary/90" 
+                        className="w-full h-10 shadow-lg bg-primary hover:bg-primary/90" 
                         data-testid="mobile-button-login"
                         onClick={() => setIsOpen(false)}
                       >

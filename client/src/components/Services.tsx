@@ -115,7 +115,7 @@ export default function Services() {
                       <ArrowRight className="h-4 w-4 sm:h-5 sm:w-5 ml-1 sm:ml-2" />
                     </Button>
                   </Link>
-                  <Link href="/games" className="flex-1">
+                  <Link href="/app-demo" className="flex-1">
                     <Button variant="outline" className="w-full text-xs sm:text-base" data-testid="button-view-demo">
                       <Play className="h-4 w-4 sm:h-5 sm:w-5 mr-1 sm:mr-2" />
                       View Demo

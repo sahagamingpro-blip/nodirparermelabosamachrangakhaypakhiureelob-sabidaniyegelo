@@ -20,15 +20,16 @@ export default function Footer() {
 
   const footerLinks = {
     services: [
-      { name: 'Slot Games', href: '/services#slots' },
-      { name: 'Indian Rummy', href: '/services#slots' },
-      { name: 'Teen Patti', href: '/services#slots' },
-      { name: 'Crash Games (Aviator)', href: '/services#slots' },
-      { name: 'Fishing Games', href: '/services#slots' }
+      { name: 'Slot Games Development', href: '/services#slots' },
+      { name: 'Indian Rummy Games Development', href: '/services#slots' },
+      { name: 'Teen Patti Games Development', href: '/services#slots' },
+      { name: 'Crash Games (Aviator) Development', href: '/services#slots' },
+      { name: 'Fishing Games Development', href: '/services#slots' },
+      { name: 'Sports/Casino Games Development', href: '/services#slots' }
     ],
     company: [
       { name: 'About Us', href: '/about' },
-      { name: 'View App Demo', href: '/games' },
+      { name: 'View App Demo', href: '/app-demo' },
       { name: 'View Admin Demo', href: '/admin-demo' }
     ],
     support: [
@@ -59,7 +60,7 @@ export default function Footer() {
               </div>
             </Link>
             <p className="text-muted-foreground mb-6 max-w-md">
-              Professional casino game development company specializing in YONO SLOT Game Development. 
+              Professional Slot, Casino game development company specializing in YONO SLOT Game Development. 
               We provide API-based slot games, Indian rummy, teen patti, crash games like aviator, and fishing games.
             </p>
             

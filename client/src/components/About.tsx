@@ -18,15 +18,15 @@ import {
 
 const milestones = [
   { year: '2019', title: 'Company Founded', desc: 'Started with a vision to revolutionize casino gaming' },
-  { year: '2020', title: 'First 100 Games', desc: 'Delivered our first 100+ games to satisfied clients' },
+  { year: '2020', title: 'First 20 Games', desc: 'Delivered our first 20+ games to satisfied clients' },
   { year: '2021', title: 'API Partnerships', desc: 'Partnered with major providers like Jili, JDB, and Evolution' },
   { year: '2022', title: 'Global Expansion', desc: 'Expanded operations to serve clients worldwide' },
   { year: '2023', title: 'Innovation Award', desc: 'Won "Best Casino Development Company" award' },
-  { year: '2024', title: '500+ Games Delivered', desc: 'Reached milestone of 500+ successful game deliveries' }
+  { year: '2024', title: '124+ Games Delivered', desc: 'Reached milestone of 124+ successful game deliveries' }
 ];
 
 const team = [
-  { name: 'Alex Rodriguez', role: 'CEO & Founder', bio: '10+ years in gaming industry, former EA Games developer', avatar: '', location: 'San Francisco, CA' },
+  { name: 'Majnu Rao', role: 'CEO & Founder', bio: '10+ years in gaming industry, former EA Games developer', avatar: '', location: 'Bangalore, IND' },
   { name: 'Sarah Chen', role: 'CTO', bio: 'Expert in casino gaming APIs and blockchain integration', avatar: '', location: 'Singapore' },
   { name: 'Michael Kumar', role: 'Lead Developer', bio: 'Specialized in Rummy and card game development', avatar: '', location: 'Mumbai, India' },
   { name: 'Emily Johnson', role: 'UX Designer', bio: 'Casino UI/UX specialist with 8+ years experience', avatar: '', location: 'London, UK' }
@@ -60,9 +60,9 @@ export default function About() {
         {/* Stats */}
         <div className="grid grid-cols-2 sm:grid-cols-4 gap-4 sm:gap-8 mb-16">
           {[
-            { number: '500+', label: 'Games Delivered' },
-            { number: '100+', label: 'Happy Clients' },
-            { number: '50+', label: 'Countries Served' },
+            { number: '124+', label: 'Games Delivered' },
+            { number: '118+', label: 'Happy Clients' },
+            { number: '5+', label: 'Countries Served' },
             { number: '5', label: 'Years Experience' }
           ].map((stat, index) => (
             <div key={index} className="text-center">
@@ -169,8 +169,8 @@ export default function About() {
                 Join the 100+ entrepreneurs who have built successful gaming platforms with our expertise.
               </p>
               <div className="flex flex-col sm:flex-row gap-2 sm:gap-4 justify-center">
-                <Button size="lg" className="w-full sm:w-auto" data-testid="button-start-project">Start Your Project</Button>
-                <Button variant="outline" size="lg" className="w-full sm:w-auto" data-testid="button-meet-team">Meet Our Team</Button>
+                <Button size="lg" className="w-full sm:w-auto" data-testid="button-start-project" onClick={() => window.location.href = '/contact'}>Start Your Project</Button>
+                <Button variant="outline" size="lg" className="w-full sm:w-auto" data-testid="button-meet-team" onClick={() => window.location.href = '/contact'}>Meet Our Team</Button>
               </div>
             </CardContent>
           </Card>

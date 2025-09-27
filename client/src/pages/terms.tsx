@@ -45,14 +45,14 @@ export default function TermsOfService() {
         "Commercial use is permitted for the purchased game package",
         "Reselling the source code as-is to other parties is prohibited",
         "A2Z Game Developer retains no ownership rights after delivery",
-        "You are responsible for hosting, maintenance, and legal compliance"
+        "You are responsible for domain, hosting, maintenance, and legal compliance"
       ]
     },
     {
       title: "Support & Warranty",
       icon: AlertTriangle,
       content: [
-        "30 days of basic technical support included after delivery",
+        "Free 30 days of basic technical support included after delivery",
         "Bug fixes for critical issues provided during support period",
         "Additional customizations may incur extra charges",
         "No warranty on third-party integrations or hosting issues",
@@ -66,12 +66,6 @@ export default function TermsOfService() {
       <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Header */}
         <div className="text-center mb-12">
-          <Link href="/">
-            <Button variant="ghost" className="mb-4" data-testid="button-back-home">
-              <ArrowLeft className="h-4 w-4 mr-2" />
-              Back to Home
-            </Button>
-          </Link>
           
           <Badge className="mb-4 bg-accent/20 text-accent border-accent">
             <FileText className="h-3 w-3 mr-1" />
@@ -88,7 +82,7 @@ export default function TermsOfService() {
           </p>
           
           <p className="text-sm text-muted-foreground mt-4">
-            Last updated: September 22, 2025
+            Last updated: August 14, 2025
           </p>
         </div>
 
@@ -156,7 +150,7 @@ export default function TermsOfService() {
                   <ul className="space-y-2 text-muted-foreground">
                     <li className="flex items-start">
                       <div className="h-2 w-2 rounded-full bg-amber-500 mt-2 mr-3 flex-shrink-0" />
-                      Full payment of ₹1,30,000 required before project delivery
+                      Full payment of ₹1,30,000 required before start your project
                     </li>
                     <li className="flex items-start">
                       <div className="h-2 w-2 rounded-full bg-amber-500 mt-2 mr-3 flex-shrink-0" />
@@ -173,7 +167,7 @@ export default function TermsOfService() {
                     </li>
                     <li className="flex items-start">
                       <div className="h-2 w-2 rounded-full bg-amber-500 mt-2 mr-3 flex-shrink-0" />
-                      No refunds after successful delivery of complete source code
+                      No refunds after successful delivery of complete admin panel,source code and apk file
                     </li>
                   </ul>
                 </div>

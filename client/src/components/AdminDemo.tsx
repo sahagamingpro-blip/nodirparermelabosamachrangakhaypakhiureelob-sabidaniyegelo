@@ -55,10 +55,10 @@ const features = [
 ];
 
 const stats = [
-  { title: 'Active Players', value: '12,847', change: '+12%', icon: Users, color: 'text-blue-500' },
+  { title: 'Active Players', value: '90,847', change: '+12%', icon: Users, color: 'text-blue-500' },
   { title: 'Revenue Today', value: '$45,290', change: '+18%', icon: DollarSign, color: 'text-green-500' },
-  { title: 'Game Sessions', value: '8,394', change: '+7%', icon: Activity, color: 'text-purple-500' },
-  { title: 'Conversion Rate', value: '3.2%', change: '+0.4%', icon: TrendingUp, color: 'text-orange-500' }
+  { title: 'Game Sessions', value: '80,394', change: '+7%', icon: Activity, color: 'text-purple-500' },
+  { title: 'Conversion Rate', value: '32.2%', change: '+0.4%', icon: TrendingUp, color: 'text-orange-500' }
 ];
 
 export default function AdminDemo() {
@@ -256,11 +256,11 @@ export default function AdminDemo() {
                 See how easy it is to manage your gaming platform.
               </p>
               <div className="flex flex-col gap-4 justify-center">
-                <Button size="lg" data-testid="button-request-demo" className="text-sm sm:text-base">
+                <Button size="lg" data-testid="button-request-demo" className="text-sm sm:text-base" onClick={() => window.location.href = '/contact'}>
                   <Eye className="h-4 sm:h-5 w-4 sm:w-5 mr-2" />
                   Request Live Demo
                 </Button>
-                <Button variant="outline" size="lg" data-testid="button-download-brochure" className="text-sm sm:text-base">
+                <Button variant="outline" size="lg" data-testid="button-download-brochure" className="text-sm sm:text-base" onClick={() => window.location.href = '/contact'}>
                   <Download className="h-4 sm:h-5 w-4 sm:w-5 mr-2" />
                   Download Brochure
                 </Button>

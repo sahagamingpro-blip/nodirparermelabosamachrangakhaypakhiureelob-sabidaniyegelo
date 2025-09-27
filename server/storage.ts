@@ -2,6 +2,7 @@ import { type User, type InsertUser } from "@shared/schema";
 import { randomUUID } from "crypto";
 import session from "express-session";
 import createMemoryStore from "memorystore";
+import { MySQLStorage } from "./mysql-storage";
 
 const MemoryStore = createMemoryStore(session);
 
@@ -9,14 +10,15 @@ const MemoryStore = createMemoryStore(session);
 // you might need
 
 export interface IStorage {
-  getUser(id: string): Promise<User | undefined>;
+  getUser(id: number): Promise<User | undefined>;
   getUserByUsername(username: string): Promise<User | undefined>;
   createUser(user: InsertUser): Promise<User>;
   sessionStore: session.Store & { destroy?: (sid: string, callback?: (err?: any) => void) => void };
 }
 
 export class MemStorage implements IStorage {
-  private users: Map<string, User>;
+  private users: Map<number, User>;
+  private nextId: number = 1;
   sessionStore: session.Store & { destroy?: (sid: string, callback?: (err?: any) => void) => void };
 
   constructor() {
@@ -26,7 +28,7 @@ export class MemStorage implements IStorage {
     });
   }
 
-  async getUser(id: string): Promise<User | undefined> {
+  async getUser(id: number): Promise<User | undefined> {
     return this.users.get(id);
   }
 
@@ -37,15 +39,18 @@ export class MemStorage implements IStorage {
   }
 
   async createUser(insertUser: InsertUser): Promise<User> {
-    const id = randomUUID();
+    const id = this.nextId++;
     const user: User = { 
       ...insertUser, 
       id,
-      dateOfBirth: insertUser.dateOfBirth.toISOString().split('T')[0] // Convert Date to string for storage
+      dateOfBirth: insertUser.dateOfBirth // Already a string
     };
     this.users.set(id, user);
     return user;
   }
 }
 
-export const storage = new MemStorage();
+// Use MySQL storage in production, memory storage in development
+export const storage = process.env.NODE_ENV === 'production' 
+  ? new MySQLStorage() 
+  : new MySQLStorage(); // Use MySQL for both dev and prod

@@ -11,6 +11,7 @@ import Navigation from "@/components/Navigation";
 import Hero from "@/components/Hero";
 import Services from "@/components/Services";
 import GameShowcase from "@/components/GameShowcase";
+import HomepageScreenshots from "@/components/HomepageScreenshots";
 import Pricing from "@/components/Pricing";
 import Reviews from "@/components/Reviews";
 import About from "@/components/About";
@@ -23,6 +24,14 @@ import NotFound from "@/pages/not-found";
 import PrivacyPolicy from "@/pages/privacy";
 import TermsOfService from "@/pages/terms";
 import AuthPage from "@/pages/auth-page";
+import OrderPage from "@/pages/order-page";
+import OrderStatusPage from "@/pages/order-status";
+import AdminPanel from "@/pages/admin-panel";
+import AdminLogin from "@/pages/admin-login";
+import ApiPartners from "@/components/ApiPartners"; // ✅ Import ApiPartners page
+import Portfolio from "@/components/Portfolio";
+import StatusPage from "@/pages/status";
+import { ProtectedRoute } from "@/lib/protected-route";
 
 // Home Page Component
 function HomePage() {
@@ -30,7 +39,9 @@ function HomePage() {
     <div>
       <Hero />
       <Services />
-      <GameShowcase />
+      <HomepageScreenshots />
+      <Portfolio />
+      <ApiPartners />
       <Reviews />
     </div>
   );
@@ -40,18 +51,25 @@ function HomePage() {
 function Router() {
   return (
     <Switch>
+      <Route path="/admin-rs" component={AdminPanel} />
+      <Route path="/admin-rs/login" component={AdminPanel} />
       <Route path="/" component={HomePage} />
       <Route path="/about" component={About} />
       <Route path="/services" component={Services} />
-      <Route path="/games" component={GameShowcase} />
+      <Route path="/app-demo" component={GameShowcase} />
       <Route path="/pricing" component={Pricing} />
       <Route path="/reviews" component={Reviews} />
       <Route path="/contact" component={Contact} />
-      <Route path="/order" component={OrderForm} />
+      <Route path="/order-old" component={OrderForm} />
+      <ProtectedRoute path="/order" component={OrderPage} />
+      <ProtectedRoute path="/order-status" component={OrderStatusPage} />
       <Route path="/admin-demo" component={AdminDemo} />
       <Route path="/privacy" component={PrivacyPolicy} />
       <Route path="/terms" component={TermsOfService} />
       <Route path="/auth" component={AuthPage} />
+      <Route path="/api-partners" component={ApiPartners} /> {/* ✅ New route */}
+      <Route path="/portfolio" component={Portfolio} /> {/* ✅ Portfolio route */}
+      <Route path="/status" component={StatusPage} /> {/* ✅ Status page route */}
       <Route component={NotFound} />
     </Switch>
   );
